@@ -1,7 +1,7 @@
-Package: TODO
+Package: ShinyVessels
 Type: Package
 Title: TODO
-Version: 0.0.0
+Version: 0.0.1
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
