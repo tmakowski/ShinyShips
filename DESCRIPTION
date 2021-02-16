@@ -1,0 +1,18 @@
+Package: TODO
+Type: Package
+Title: TODO
+Version: 0.0.0
+Authors@R: c(
+    person("Tymoteusz", "Makowski",
+           email = "makowski.tymoteusz@gmail.com",
+           role = c("aut", "cre")))
+Description: TODO
+Encoding: UTF-8
+LazyData: TRUE
+License: MIT + file LICENSE
+Imports:
+    shiny,
+    shiny.semantic
+Suggests:
+    testthat
+RoxygenNote: 7.1.1
