@@ -1,7 +1,7 @@
 Package: ShinyVessels
 Type: Package
 Title: TODO
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
@@ -11,6 +11,7 @@ Encoding: UTF-8
 LazyData: TRUE
 License: MIT + file LICENSE
 Imports:
+    assertthat,
     shiny,
     shiny.semantic
 Suggests:
