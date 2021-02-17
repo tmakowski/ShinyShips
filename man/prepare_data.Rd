@@ -4,10 +4,12 @@
 \alias{prepare_data}
 \title{Prepare sysdata.rda with processed ships data}
 \usage{
-prepare_data(ships_data_path)
+prepare_data(ships_data_path, ...)
 }
 \arguments{
 \item{ships_data_path}{A path to ships.csv input data.}
+
+\item{...}{Arguments passed on to \code{usethis::use_data}.}
 }
 \description{
 Prepare sysdata.rda with processed ships data

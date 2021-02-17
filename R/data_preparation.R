@@ -1,13 +1,19 @@
 #' Prepare sysdata.rda with processed ships data
 #'
 #' @param ships_data_path A path to ships.csv input data.
-prepare_data <- function(ships_data_path) {
+#' @param ... Arguments passed on to `usethis::use_data`.
+prepare_data <- function(ships_data_path, ...) {
+  assertthat::assert_that(
+    is.character(ships_data_path), length(ships_data_path) == 1,
+    file.exists(ships_data_path)
+  )
+
   ships <- list(
     type_name_pairs = get_unique_type_name_pairs(ships_data_path),
     distances = get_ships_distances(ships_data_path)
   )
 
-  usethis::use_data(ships, internal = TRUE)
+  usethis::use_data(ships, internal = TRUE, ...)
 
   invisible(ships)
 }
