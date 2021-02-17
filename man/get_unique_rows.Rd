@@ -4,10 +4,10 @@
 \alias{get_unique_rows}
 \title{Get unique rows from a \code{data.frame}}
 \usage{
-get_unique_rows(df, col_names)
+get_unique_rows(dt, col_names)
 }
 \arguments{
-\item{df}{An input \code{data.frame}.}
+\item{dt}{An input \code{data.frame}.}
 
 \item{col_names}{A vector of column names to subset from \code{df}.}
 }
