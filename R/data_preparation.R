@@ -48,11 +48,11 @@ get_ships_distances <- function(ships_data_path) {
   )
 
   ships <- data.table::fread(ships_data_path)
-  ships_coords <- ships[order(DATETIME), .(SHIP_ID, LAT, LON)]
+  ships_coords <- ships[order(DATETIME), .(SHIPNAME, LAT, LON)]
 
   # Removing rows where the ship has not moved and omitting stationary ships
   unique_coords <- unique(ships_coords)
-  moving_ships <- unique_coords[, .(LAT, LON, n = .N), by = .(SHIP_ID)][n > 1]
+  moving_ships <- unique_coords[, .(LAT, LON, n = .N), by = .(SHIPNAME)][n > 1]
 
   sailed_dists <- moving_ships[,
     .(
@@ -62,17 +62,17 @@ get_ships_distances <- function(ships_data_path) {
       lat_end   = LAT,
       lon_end   = LON
     ),
-    by = .(SHIP_ID)
+    by = .(SHIPNAME)
   ]
 
   max_dists <- sailed_dists[,
     .(
       max_dist = max(dist, na.rm = TRUE)
     ),
-    by = .(SHIP_ID)
+    by = .(SHIPNAME)
   ]
 
-  max_dists_coords <- max_dists[sailed_dists, on = .(SHIP_ID)][max_dist == dist]
+  max_dists_coords <- max_dists[sailed_dists, on = .(SHIPNAME)][max_dist == dist]
 
   # Rows are sorted by DATETIME therefore, tail(..., 1) is latest observation
   max_dists_coords[,
@@ -83,6 +83,6 @@ get_ships_distances <- function(ships_data_path) {
       lat_end   = tail(lat_end, 1),
       lon_end   = tail(lon_end, 1)
     ),
-    by = SHIP_ID
+    by = SHIPNAME
   ]
 }
