@@ -1,6 +1,20 @@
-#' Extract unique ship type and name pairs
+#' Prepare sysdata.rda with processed ships data
 #'
 #' @param ships_data_path A path to ships.csv input data.
+prepare_data <- function(ships_data_path) {
+  ships <- list(
+    type_name_pairs = get_unique_type_name_pairs(ships_data_path),
+    distances = get_ships_distances(ships_data_path)
+  )
+
+  usethis::use_data(ships, internal = TRUE)
+
+  invisible(ships)
+}
+
+#' Extract unique ship type and name pairs
+#'
+#' @inheritParams prepare_data
 #'
 #' @return A `data.table` with unique (ship type, ship name) pairs.
 get_unique_type_name_pairs <- function(ships_data_path) {
@@ -15,7 +29,7 @@ get_unique_type_name_pairs <- function(ships_data_path) {
 
 #' Extract max distance per ship between consecutive observations
 #'
-#' @param ships_data_path A path to ships.csv input data.
+#' @inheritParams prepare_data
 #'
 #' @return A `data.table` with SHIP_ID, travel start point, end point, and
 #'   travelled distance for the maximum travelled distance.

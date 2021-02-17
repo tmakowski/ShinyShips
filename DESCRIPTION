@@ -1,7 +1,7 @@
 Package: ShinyShips
 Type: Package
 Title: TODO
-Version: 0.0.8
+Version: 0.1.0
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
@@ -10,6 +10,8 @@ Description: TODO
 Encoding: UTF-8
 LazyData: TRUE
 License: MIT + file LICENSE
+Depends:
+    R (>= 2.10)
 Imports:
     assertthat,
     data.table,
@@ -17,6 +19,7 @@ Imports:
     shiny,
     shiny.semantic
 Suggests:
+    usethis,
     testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
