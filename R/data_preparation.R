@@ -8,8 +8,11 @@ prepare_data <- function(ships_data_path, ...) {
     file.exists(ships_data_path)
   )
 
+  type_names <- get_type_names_mapping(ships_data_path)
+
   ships <- list(
-    type_name_pairs = get_unique_type_name_pairs(ships_data_path),
+    types = names(type_names),
+    type_names = type_names,
     distances = get_ships_distances(ships_data_path)
   )
 
@@ -18,19 +21,26 @@ prepare_data <- function(ships_data_path, ...) {
   invisible(ships)
 }
 
-#' Extract unique ship type and name pairs
+#' Extract ship type to names mapping
 #'
 #' @inheritParams prepare_data
 #'
-#' @return A `data.table` with unique (ship type, ship name) pairs.
-get_unique_type_name_pairs <- function(ships_data_path) {
+#' @return A named `list` with ship types as names and ship names as elements.
+get_type_names_mapping <- function(ships_data_path) {
   assertthat::assert_that(
     is.character(ships_data_path), length(ships_data_path) == 1,
     file.exists(ships_data_path)
   )
 
   ships <- data.table::fread(ships_data_path)
-  get_unique_rows(ships, c("ship_type", "SHIPNAME"))
+  ship_types <- sort(unique(ships$ship_type))
+
+  type_names <- list()
+  for (type in ship_types) {
+    type_names[[type]] <- sort(unique(ships[ship_type == type]$SHIPNAME))
+  }
+
+  type_names
 }
 
 #' Extract max distance per ship between consecutive observations
