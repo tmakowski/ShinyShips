@@ -1,4 +1,4 @@
 library(testthat)
-library(ShinyVessels)
+library(ShinyShips)
 
-test_check("ShinyVessels")
+test_check("ShinyShips")
