@@ -1,6 +1,6 @@
 app_ui <- function() {
   semanticPage(
-    h1("Hello world!"),
+    title = "Shiny Ships",
     ui_ship_selection()
   )
 }
