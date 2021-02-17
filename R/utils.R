@@ -1,9 +1,9 @@
-#' Get unique rows from data.frame
+#' Get unique rows from a `data.frame`
 #'
-#' @param df an input \code{data.frame}
-#' @param col_names a vector of column names to subset from \code{df}
+#' @param df An input `data.frame`.
+#' @param col_names A vector of column names to subset from `df`.
 #'
-#' @return A \code{data.frame} with unique rows
+#' @return A `data.frame` with unique rows.
 get_unique_rows <- function(df, col_names) {
   assertthat::assert_that(
     is.data.frame(df),
