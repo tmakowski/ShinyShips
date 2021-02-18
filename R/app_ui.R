@@ -9,7 +9,8 @@ ui_ship_selection <- function() {
   ns <- NS(NS_SHIP_SELECTION)
 
   split_layout(
-    dropdown_input(ns("type"), ships$types),
+    # TODO: add labels
+    dropdown_input(ns("type"), ships$types, value = ships$types[1]),
     dropdown_input(ns("name"), NULL)
   )
 }
