@@ -2,6 +2,9 @@
 #'
 #' @param ships_data_path A path to ships.csv input data.
 #' @param ... Arguments passed on to `usethis::use_data`.
+#'
+#' @examples
+#' prepare_data("dev/data_raw/ships.csv.gz", overwrite = TRUE)
 prepare_data <- function(ships_data_path, ...) {
   assertthat::assert_that(
     is.character(ships_data_path), length(ships_data_path) == 1,
