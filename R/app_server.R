@@ -1,5 +1,9 @@
 app_server <- function(input, output, session) {
-  ship_name <- moduleServer(NS_SHIP_SELECTION, server_ship_selection, session)
+  name <- moduleServer(NS_SHIP_SELECTION, server_ship_selection, session)
+
+  details <- reactive({
+    ships$distances[ship_name == name()]
+  })
 }
 
 server_ship_selection <- function(input, output, session) {
