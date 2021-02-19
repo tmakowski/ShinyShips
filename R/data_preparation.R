@@ -31,7 +31,10 @@ prepare_data <- function(ships_data_path, ...) {
 #'
 #' @return A named `list` with ship types as names and ship names as elements.
 get_type_names_mapping <- function(ships_data) {
-  assertthat::assert_that(data.table::is.data.table(ships_data))
+  assertthat::assert_that(
+    data.table::is.data.table(ships_data),
+    nrow(ships_data) > 0
+  )
 
   ship_types <- sort(unique(ships_data$ship_type))
 
@@ -52,7 +55,10 @@ get_type_names_mapping <- function(ships_data) {
 #'
 #' @import data.table
 get_ships_distances <- function(ships_data) {
-  assertthat::assert_that(data.table::is.data.table(ships_data))
+  assertthat::assert_that(
+    data.table::is.data.table(ships_data),
+    nrow(ships_data) > 0
+  )
 
   ships_coords <- ships_data[order(DATETIME), .(SHIPNAME, LAT, LON)]
 
