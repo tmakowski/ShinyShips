@@ -64,8 +64,15 @@ get_ships_distances <- function(ships_data) {
 
   ships_coords <- ships_data[order(DATETIME), .(SHIPNAME, LAT, LON)]
 
-  # Removing rows where the ship has not moved and omitting stationary ships
-  unique_coords <- unique(ships_coords)
+  # Removing consecutive rows where the ship has not moved - leaving only the
+  # newest (sorted by DATETIME) observation
+  ships_coords[,
+    has_moved := data.table::shift(LAT, type = "lead") != LAT |
+      data.table::shift(LON, type = "lead") != LON,
+    by = .(SHIPNAME)
+  ]
+  unique_coords <- ships_coords[has_moved | is.na(has_moved)]
+
   moving_ships <- unique_coords[, .(LAT, LON, n = .N), by = .(SHIPNAME)][n > 1]
 
   sailed_dists <- moving_ships[,
