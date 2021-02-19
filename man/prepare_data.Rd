@@ -14,3 +14,8 @@ prepare_data(ships_data_path, ...)
 \description{
 Prepare sysdata.rda with processed ships data
 }
+\examples{
+\dontrun{
+prepare_data("dev/data_raw/ships.csv.gz", overwrite = TRUE)
+}
+}
