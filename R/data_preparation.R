@@ -96,7 +96,7 @@ get_ships_distances <- function(ships_data) {
   max_dists_coords <- max_dists[sailed_dists, on = .(SHIPNAME)][max_dist == dist]
 
   # Rows are sorted by DATETIME therefore, tail(..., 1) is latest observation
-  max_dists_coords[,
+  ships_distances <- max_dists_coords[,
     .(
       dist      = tail(dist, 1),
       lat_start = tail(lat_start, 1),
@@ -106,4 +106,8 @@ get_ships_distances <- function(ships_data) {
     ),
     by = SHIPNAME
   ]
+
+  data.table::setnames(ships_distances, "SHIPNAME", "ship_name")
+
+  ships_distances
 }

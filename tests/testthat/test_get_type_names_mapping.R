@@ -41,7 +41,7 @@ test_that("test get_ships_distances", {
     LON = c(0, 1, 10)
   )
   res1 <- data.table::data.table(
-    SHIPNAME = "Ship1",
+    ship_name = "Ship1",
     dist = geosphere::distGeo(c(1, 1), c(10, 10)),
     lat_start = 1,
     lon_start = 1,
@@ -53,7 +53,7 @@ test_that("test get_ships_distances", {
   # Ommiting ships with too few observations
   ships_data2 <- data.table::rbindlist(list(
     ships_data1,
-    data.table::data.table(SHIPNAME = "Ship2", DATETIME = 1, LAT = 0, LON = 0)
+    data.table::data.table(ship_name = "Ship2", DATETIME = 1, LAT = 0, LON = 0)
   ))
   expect_equal(get_ships_distances(ships_data2), res1)
 
@@ -77,7 +77,7 @@ test_that("test get_ships_distances", {
     LON = c(0, 1, 0)
   )
   res4 <- data.table::data.table(
-    SHIPNAME = "Ship1",
+    ship_name = "Ship1",
     dist = geosphere::distGeo(c(0, 1), c(0, 0)),
     lat_start = 0,
     lon_start = 1,
