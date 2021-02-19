@@ -24,17 +24,17 @@ prepare_data <- function(ships_data_path, ...) {
 
 #' Extract ship type to names mapping
 #'
-#' @param ships A `data.table` with ships raw data.
+#' @param ships_data A `data.table` with ships raw data.
 #'
 #' @return A named `list` with ship types as names and ship names as elements.
-get_type_names_mapping <- function(ships) {
-  assertthat::assert_that(data.table::is.data.table(ships))
+get_type_names_mapping <- function(ships_data) {
+  assertthat::assert_that(data.table::is.data.table(ships_data))
 
-  ship_types <- sort(unique(ships$ship_type))
+  ship_types <- sort(unique(ships_data$ship_type))
 
   type_names <- list()
   for (type in ship_types) {
-    type_names[[type]] <- sort(unique(ships[ship_type == type]$SHIPNAME))
+    type_names[[type]] <- sort(unique(ships_data[ship_type == type]$SHIPNAME))
   }
 
   type_names
@@ -48,10 +48,10 @@ get_type_names_mapping <- function(ships) {
 #'   travelled distance for the maximum travelled distance.
 #'
 #' @import data.table
-get_ships_distances <- function(ships) {
-  assertthat::assert_that(data.table::is.data.table(ships))
+get_ships_distances <- function(ships_data) {
+  assertthat::assert_that(data.table::is.data.table(ships_data))
 
-  ships_coords <- ships[order(DATETIME), .(SHIPNAME, LAT, LON)]
+  ships_coords <- ships_data[order(DATETIME), .(SHIPNAME, LAT, LON)]
 
   # Removing rows where the ship has not moved and omitting stationary ships
   unique_coords <- unique(ships_coords)

@@ -4,10 +4,10 @@
 \alias{get_ships_distances}
 \title{Extract max distance per ship between consecutive observations}
 \usage{
-get_ships_distances(ships)
+get_ships_distances(ships_data)
 }
 \arguments{
-\item{ships}{A \code{data.table} with ships raw data.}
+\item{ships_data}{A \code{data.table} with ships raw data.}
 }
 \value{
 A \code{data.table} with SHIP_ID, travel start point, end point, and
