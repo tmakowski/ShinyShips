@@ -1,14 +1,13 @@
 Package: ShinyShips
 Type: Package
 Title: TODO
-Version: 0.1.5
+Version: 0.2.0
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
            role = c("aut", "cre")))
 Description: TODO
 Encoding: UTF-8
-LazyData: TRUE
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
