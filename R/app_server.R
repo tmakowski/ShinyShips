@@ -5,6 +5,17 @@ app_server <- function(input, output, session) {
   details <- reactive({
     ships$distances[ship_name == name()]
   })
+
+  output$map <- leaflet::renderLeaflet({
+    dets <- details()
+
+    leaflet::leaflet() %>>%
+      leaflet::addTiles() %>>%
+      leaflet::addMarkers(
+        lng = c(dets$lon_start, dets$lon_end),
+        lat = c(dets$lat_start, dets$lat_end)
+      )
+  })
 }
 
 server_ship_selection <- function(input, output, session) {

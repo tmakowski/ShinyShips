@@ -1,7 +1,8 @@
 app_ui <- function() {
   semanticPage(
     title = "Shiny Ships",
-    ui_ship_selection()
+    ui_ship_selection(),
+    leaflet::leafletOutput("map")
   )
 }
 
