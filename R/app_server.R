@@ -1,3 +1,4 @@
+#' @importFrom pipeR %>>%
 app_server <- function(input, output, session) {
   name <- moduleServer(NS_SHIP_SELECTION, server_ship_selection, session)
 
