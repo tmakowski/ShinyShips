@@ -8,12 +8,13 @@ prepare_data <- function(ships_data_path, ...) {
     file.exists(ships_data_path)
   )
 
-  type_names <- get_type_names_mapping(ships_data_path)
+  ships_data <- data.table::fread(ships_data_path)
+  type_names <- get_type_names_mapping(ships_data)
 
   ships <- list(
     types = names(type_names),
     type_names = type_names,
-    distances = get_ships_distances(ships_data_path)
+    distances = get_ships_distances(ships_data)
   )
 
   usethis::use_data(ships, internal = TRUE, ...)
@@ -23,16 +24,12 @@ prepare_data <- function(ships_data_path, ...) {
 
 #' Extract ship type to names mapping
 #'
-#' @inheritParams prepare_data
+#' @param ships A `data.table` with ships raw data.
 #'
 #' @return A named `list` with ship types as names and ship names as elements.
-get_type_names_mapping <- function(ships_data_path) {
-  assertthat::assert_that(
-    is.character(ships_data_path), length(ships_data_path) == 1,
-    file.exists(ships_data_path)
-  )
+get_type_names_mapping <- function(ships) {
+  assertthat::assert_that(data.table::is.data.table(ships))
 
-  ships <- data.table::fread(ships_data_path)
   ship_types <- sort(unique(ships$ship_type))
 
   type_names <- list()
@@ -45,19 +42,15 @@ get_type_names_mapping <- function(ships_data_path) {
 
 #' Extract max distance per ship between consecutive observations
 #'
-#' @inheritParams prepare_data
+#' @inheritParams get_type_names_mapping
 #'
 #' @return A `data.table` with SHIP_ID, travel start point, end point, and
 #'   travelled distance for the maximum travelled distance.
 #'
 #' @import data.table
-get_ships_distances <- function(ships_data_path) {
-  assertthat::assert_that(
-    is.character(ships_data_path), length(ships_data_path) == 1,
-    file.exists(ships_data_path)
-  )
+get_ships_distances <- function(ships) {
+  assertthat::assert_that(data.table::is.data.table(ships))
 
-  ships <- data.table::fread(ships_data_path)
   ships_coords <- ships[order(DATETIME), .(SHIPNAME, LAT, LON)]
 
   # Removing rows where the ship has not moved and omitting stationary ships

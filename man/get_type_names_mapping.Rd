@@ -4,10 +4,10 @@
 \alias{get_type_names_mapping}
 \title{Extract ship type to names mapping}
 \usage{
-get_type_names_mapping(ships_data_path)
+get_type_names_mapping(ships)
 }
 \arguments{
-\item{ships_data_path}{A path to ships.csv input data.}
+\item{ships}{A \code{data.table} with ships raw data.}
 }
 \value{
 A named \code{list} with ship types as names and ship names as elements.
