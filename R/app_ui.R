@@ -13,7 +13,7 @@ app_ui <- function() {
       h3(class = "header", "Map settings"),
       checkboxInput("labels", "Show labels")
     ),
-    button("btn", "Show map settings", class = "bottom attached fluid")
+    button("map_settings_toggle", NULL, class = "bottom attached fluid")
   )
 }
 
