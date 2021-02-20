@@ -6,7 +6,6 @@ app_ui <- function() {
     ui_ship_selection(),
     segment(
       class = "raised top attached",
-      # button("settings", icon("settings"), class = "circular icon"),
       leaflet::leafletOutput("map", height = "600px")
     ),
     shinyjs::hidden(
