@@ -6,6 +6,11 @@ app_ui <- function() {
     ui_ship_selection(),
     segment(
       class = "raised top attached",
+      p(
+        class = "ui ribbon label blue",
+        style = "margin-bottom: 10px;",
+        "Ship travel visualization"
+      ),
       leaflet::leafletOutput("map", height = "600px")
     ),
     shinyjs::hidden(
