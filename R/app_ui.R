@@ -12,7 +12,8 @@ app_ui <- function() {
       segment(
         id = "map_settings",
         class = "raised attached",
-        checkbox_input("labels", "Show labels", is_marked = FALSE)
+        checkbox_input("labels", "Show labels", is_marked = FALSE),
+        checkbox_input("line", "Show line")
       )
     ),
     button(

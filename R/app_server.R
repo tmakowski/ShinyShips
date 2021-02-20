@@ -43,6 +43,20 @@ app_server <- function(input, output, session) {
       leaflet::clearTiles() %>>%
       leaflet::addProviderTiles(tiles)
   })
+
+  # Line updater ---------------------------------------------------------------
+  observe({
+    dets <- details()
+    m <- leaflet::leafletProxy("map") %>>% leaflet::clearShapes()
+
+    if (input$line) {
+      leaflet::addPolylines(
+        m,
+        lng = c(dets$lon_start, dets$lon_end),
+        lat = c(dets$lat_start, dets$lat_end)
+      )
+    }
+  })
 }
 
 server_ship_selection <- function(input, output, session) {
