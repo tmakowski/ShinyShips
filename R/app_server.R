@@ -6,6 +6,19 @@ app_server <- function(input, output, session) {
     ships$distances[ship_name == name()]
   })
 
+  # Tiles updater -------------------------------------------------------------
+  observe({
+    tiles <- leaflet::providers$CartoDB.PositronNoLabels
+    if (input$labels) {
+      tiles <- leaflet::providers$CartoDB.Positron
+    }
+
+    leaflet::leafletProxy("map") %>>%
+      leaflet::clearTiles() %>>%
+      leaflet::addProviderTiles(tiles)
+  })
+
+  # Map output -----------------------------------------------------------------
   output$map <- leaflet::renderLeaflet({
     dets <- details()
 

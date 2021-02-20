@@ -7,6 +7,10 @@ app_ui <- function() {
     segment(
       class = "raised",
       leaflet::leafletOutput("map", height = "600px")
+    ),
+    segment(
+      h3(class = "header", "Map settings"),
+      checkboxInput("labels", "Show labels")
     )
   )
 }
