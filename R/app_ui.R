@@ -13,7 +13,6 @@ app_ui <- function() {
       segment(
         id = "map_settings",
         class = "raised attached",
-        h3(class = "header", "Map settings"),
         checkboxInput("labels", "Show labels")
       )
     ),
