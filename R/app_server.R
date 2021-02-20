@@ -31,7 +31,12 @@ app_server <- function(input, output, session) {
     btn_label <- paste(if (show) "Hide" else "Show", "settings")
     update_action_button(session, "map_settings_toggle", label = btn_label)
 
-    shinyjs::toggleElement("map_settings", condition = show)
+    shinyjs::toggleElement(
+      "map_settings",
+      anim = TRUE,
+      time = 0.3,
+      condition = show
+    )
   })
 
   # Tiles updater -------------------------------------------------------------
