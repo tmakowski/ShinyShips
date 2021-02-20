@@ -65,5 +65,12 @@ server_ship_selection <- function(input, output, session) {
     update_dropdown_input(session, "name", ships$type_names[[type]], value = NA)
   })
 
+  observeEvent(
+    input$type,
+    shinyjs::enable("name"),
+    ignoreInit = TRUE,
+    once = TRUE
+  )
+
   reactive(input$name)
 }

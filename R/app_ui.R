@@ -44,7 +44,12 @@ ui_ship_selection <- function() {
       div(
         class = "content",
         div(class = "header", "Ship name"),
-        div(class = "description", dropdown_input(ns("name"), NULL))
+        div(
+          class = "description",
+          shinyjs::disabled(
+            dropdown_input(ns("name"), NULL)
+          )
+        )
       )
     )
   )
