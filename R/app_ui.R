@@ -31,6 +31,8 @@ ui_ship_selection <- function() {
     class = "two",
     style = "margin-right: 10%; margin-left: 10%;",
     card(
+      id = ns("card_type"),
+      class = "green",
       div(
         class = "content",
         div(class = "header", "Ship type"),
@@ -41,6 +43,7 @@ ui_ship_selection <- function() {
       )
     ),
     card(
+      id = ns("card_name"),
       div(
         class = "content",
         div(class = "header", "Ship name"),
