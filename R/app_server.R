@@ -21,6 +21,12 @@ app_server <- function(input, output, session) {
       )
   })
 
+  # Travelled distance ---------------------------------------------------------
+  output$dist <- renderText({
+    dets <- details()
+    round(dets$dist, 2)
+  })
+
   # Map settings ---------------------------------------------------------------
   show_settings <- reactiveVal(FALSE)
 
@@ -86,6 +92,7 @@ server_ship_selection <- function(input, output, session) {
     shinyjs::removeCssClass("card_name", "green")
     shinyjs::addCssClass("card_type", "blue")
     shinyjs::addCssClass("card_name", "blue")
+    shinyjs::showElement("travelled_dist", asis = TRUE)
   })
 
   reactive(input$name)

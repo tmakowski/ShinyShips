@@ -11,7 +11,15 @@ app_ui <- function() {
         style = "margin-bottom: 10px;",
         "Ship travel visualization"
       ),
-      leaflet::leafletOutput("map", height = "600px")
+      leaflet::leafletOutput("map", height = "600px"),
+      shinyjs::hidden(
+        div(
+          id = "travelled_dist",
+          class = "ui bottom left attached label blue",
+          style = "margin-bottom: 14px; margin-left: 14px;",
+          "Travelled distance:", textOutput("dist", inline = TRUE), "m"
+        )
+      )
     ),
     shinyjs::hidden(
       segment(
