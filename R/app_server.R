@@ -9,9 +9,11 @@ app_server <- function(input, output, session) {
   # Map output -----------------------------------------------------------------
   output$map <- leaflet::renderLeaflet({
     dets <- details()
+    tiles <- isolate(map_tiles())
 
     # TODO: handle lack of data
     leaflet::leaflet() %>>%
+      leaflet::addProviderTiles(tiles) %>>%
       leaflet::addMarkers(
         lng = c(dets$lon_start, dets$lon_end),
         lat = c(dets$lat_start, dets$lat_end),
@@ -33,11 +35,15 @@ app_server <- function(input, output, session) {
   })
 
   # Tiles updater -------------------------------------------------------------
+  map_tiles <- reactiveVal(NULL)
+
   observe({
     tiles <- leaflet::providers$CartoDB.PositronNoLabels
     if (input$labels) {
       tiles <- leaflet::providers$CartoDB.Positron
     }
+
+    map_tiles(tiles)
 
     leaflet::leafletProxy("map") %>>%
       leaflet::clearTiles() %>>%
