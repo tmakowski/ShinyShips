@@ -2,7 +2,6 @@ app_ui <- function() {
   semanticPage(
     title = "Shiny Ships",
     margin = "10px 10%",
-    h1("Shiny Ships"),
     ui_ship_selection(),
     segment(
       class = "raised",
