@@ -46,7 +46,7 @@ app_server <- function(input, output, session) {
   })
 
   # Show labels setting updater ------------------------------------------------
-  map_tiles <- reactiveVal(NULL)
+  map_tiles <- reactiveVal(leaflet::providers$CartoDB.PositronNoLabels)
 
   observe({
     tiles <- leaflet::providers$CartoDB.PositronNoLabels
