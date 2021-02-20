@@ -24,9 +24,6 @@ app_server <- function(input, output, session) {
 
     # TODO: handle lack of data
     leaflet::leaflet() %>>%
-      leaflet::addProviderTiles(
-        leaflet::providers$CartoDB.PositronNoLabels
-      ) %>>%
       leaflet::addMarkers(
         lng = c(dets$lon_start, dets$lon_end),
         lat = c(dets$lat_start, dets$lat_end),
