@@ -4,13 +4,16 @@ app_ui <- function() {
     margin = "10px 10%",
     ui_ship_selection(),
     segment(
-      class = "raised",
+      class = "raised top attached",
+      # button("settings", icon("settings"), class = "circular icon"),
       leaflet::leafletOutput("map", height = "600px")
     ),
     segment(
+      class = "raised attached",
       h3(class = "header", "Map settings"),
       checkboxInput("labels", "Show labels")
-    )
+    ),
+    button("btn", "Show map settings", class = "bottom attached fluid")
   )
 }
 
