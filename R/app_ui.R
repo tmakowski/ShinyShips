@@ -6,7 +6,7 @@ app_ui <- function() {
     ui_ship_selection(),
     segment(
       class = "raised top attached",
-      p(
+      div(
         class = "ui ribbon label blue",
         style = "margin-bottom: 10px;",
         "Ship travel visualization"
