@@ -6,7 +6,7 @@ app_ui <- function() {
     ui_ship_selection(),
     segment(
       class = "raised",
-      leaflet::leafletOutput("map")
+      leaflet::leafletOutput("map", height = "600px")
     )
   )
 }
