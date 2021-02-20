@@ -36,7 +36,7 @@ ui_ship_selection <- function() {
         div(class = "header", "Ship type"),
         div(
           class = "description",
-          dropdown_input(ns("type"), ships$types, value = ships$types[1])
+          dropdown_input(ns("type"), ships$types)
         )
       )
     ),
