@@ -45,12 +45,12 @@ app_server <- function(input, output, session) {
     )
   })
 
-  # Tiles updater -------------------------------------------------------------
+  # Show labels setting updater ------------------------------------------------
   map_tiles <- reactiveVal(NULL)
 
   observe({
     tiles <- leaflet::providers$CartoDB.PositronNoLabels
-    if (input$labels) {
+    if (input$show_labels) {
       tiles <- leaflet::providers$CartoDB.Positron
     }
 
@@ -61,12 +61,12 @@ app_server <- function(input, output, session) {
       leaflet::addProviderTiles(tiles)
   })
 
-  # Line updater ---------------------------------------------------------------
+  # Show line setting updater --------------------------------------------------
   observe({
     dets <- details()
     m <- leaflet::leafletProxy("map") %>>% leaflet::clearShapes()
 
-    if (input$line) {
+    if (input$show_line) {
       leaflet::addPolylines(
         m,
         lng = c(dets$lon_start, dets$lon_end),
