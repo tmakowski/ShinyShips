@@ -1,5 +1,6 @@
 app_ui <- function() {
   semanticPage(
+    shinyjs::useShinyjs(),
     title = "Shiny Ships",
     margin = "10px 10%",
     ui_ship_selection(),
@@ -8,12 +9,19 @@ app_ui <- function() {
       # button("settings", icon("settings"), class = "circular icon"),
       leaflet::leafletOutput("map", height = "600px")
     ),
-    segment(
-      class = "raised attached",
-      h3(class = "header", "Map settings"),
-      checkboxInput("labels", "Show labels")
+    shinyjs::hidden(
+      segment(
+        id = "map_settings",
+        class = "raised attached",
+        h3(class = "header", "Map settings"),
+        checkboxInput("labels", "Show labels")
+      )
     ),
-    button("map_settings_toggle", NULL, class = "bottom attached fluid")
+    button(
+      "map_settings_toggle",
+      "Show settings",
+      class = "bottom attached fluid"
+    )
   )
 }
 

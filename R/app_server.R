@@ -37,13 +37,14 @@ app_server <- function(input, output, session) {
   # Map settings ---------------------------------------------------------------
   show_settings <- reactiveVal(FALSE)
 
-  observeEvent(input$map_settings_toggle, show_settings(!show_settings()))
+  observeEvent(input$map_settings_toggle, {
+    show <- !show_settings()
+    show_settings(show)
 
-  observe({
-    show <- show_settings()
-
-    btn_label <- paste(if (show) "Hide" else "Show", "map settings")
+    btn_label <- paste(if (show) "Hide" else "Show", "settings")
     update_action_button(session, "map_settings_toggle", label = btn_label)
+
+    shinyjs::toggleElement("map_settings", condition = show)
   })
 }
 

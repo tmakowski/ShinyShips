@@ -1,7 +1,7 @@
 Package: ShinyShips
 Type: Package
 Title: TODO
-Version: 0.2.0.9014
+Version: 0.2.0.9015
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
@@ -18,7 +18,8 @@ Imports:
     leaflet,
     pipeR,
     shiny,
-    shiny.semantic
+    shiny.semantic,
+    shinyjs
 Suggests:
     usethis,
     testthat
