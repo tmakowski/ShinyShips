@@ -1,1 +1,1 @@
-NS_SHIP_SELECTION <- "ship-selection"
+NS_SHIP_SELECTION <- "ship_selection"
