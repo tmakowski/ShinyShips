@@ -35,12 +35,14 @@ test_that("test get_ships_distances", {
   # Calculation check
   # Highest value selection
   ships_data1 <- data.table::data.table(
+    ship_type = "TypeA",
     SHIPNAME = "Ship1",
     DATETIME = 1:3,
     LAT = c(0, 1, 10),
     LON = c(0, 1, 10)
   )
   res1 <- data.table::data.table(
+    ship_type = "TypeA",
     ship_name = "Ship1",
     dist = geosphere::distGeo(c(1, 1), c(10, 10)),
     lat_start = 1,
@@ -54,6 +56,7 @@ test_that("test get_ships_distances", {
   ships_data2 <- data.table::rbindlist(list(
     ships_data1,
     data.table::data.table(
+      ship_type = "TypeA",
       SHIPNAME = "Ship2",
       DATETIME = 1,
       LAT = 0,
@@ -62,6 +65,7 @@ test_that("test get_ships_distances", {
   res2 <- data.table::rbindlist(list(
     res1,
     data.table::data.table(
+      ship_type = "TypeA",
       ship_name = "Ship2",
       dist = NA,
       lat_start = NA,
@@ -76,6 +80,7 @@ test_that("test get_ships_distances", {
   ships_data3 <- data.table::rbindlist(list(
     ships_data1,
     data.table::data.table(
+      ship_type = "TypeA",
       SHIPNAME = "Ship2",
       DATETIME = 1:3,
       LAT = c(0, 0, 0),
@@ -86,12 +91,14 @@ test_that("test get_ships_distances", {
 
   # Selecting latest observation
   ships_data4 <- data.table::data.table(
+    ship_type = "TypeA",
     SHIPNAME = "Ship1",
     DATETIME = 1:3,
     LAT = c(0, 0, 0),
     LON = c(0, 1, 0)
   )
   res4 <- data.table::data.table(
+    ship_type = "TypeA",
     ship_name = "Ship1",
     dist = geosphere::distGeo(c(0, 1), c(0, 0)),
     lat_start = 0,
@@ -100,4 +107,23 @@ test_that("test get_ships_distances", {
     lon_end = 0
   )
   expect_equal(get_ships_distances(ships_data4), res4)
+
+  # Allowing the same name in different types
+  ships_data5 <- data.table::data.table(
+    ship_type = c("TypeA", "TypeB"),
+    SHIPNAME = "Ship1",
+    DATETIME = 1,
+    LAT = 0,
+    LON = 0
+  )
+  res5 <- data.table::data.table(
+    ship_type = c("TypeA", "TypeB"),
+    ship_name = "Ship1",
+    dist = NA_real_,
+    lat_start = NA_real_,
+    lon_start = NA_real_,
+    lat_end = 0,
+    lon_end = 0
+  )
+  expect_equal(get_ships_distances(ships_data5), res5)
 })
