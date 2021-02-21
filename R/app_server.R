@@ -1,9 +1,10 @@
 #' @importFrom pipeR %>>%
 app_server <- function(input, output, session) {
-  name <- moduleServer(NS_SHIP_SELECTION, server_ship_selection, session)
+  ship <- moduleServer(NS_SHIP_SELECTION, server_ship_selection, session)
 
   details <- reactive({
-    ships$distances[ship_name == name()]
+    s <- ship()
+    ships$distances[ship_type == s$type & ship_name == s$name]
   })
 
   # Map output -----------------------------------------------------------------
@@ -96,5 +97,5 @@ server_ship_selection <- function(input, output, session) {
     shinyjs::showElement("travelled_dist", asis = TRUE)
   })
 
-  reactive(input$name)
+  reactive(list(type = input$type, name = input$name))
 }
