@@ -111,13 +111,7 @@ server_ship_selection <- function(input, output, session) {
   observeEvent(input$type, ignoreInit = TRUE, once = TRUE, {
     shinyjs::enable("name")
     shinyjs::removeCssClass("card_type", "green")
-    shinyjs::addCssClass("card_name", "green")
-  })
-
-  observeEvent(input$name, ignoreInit = TRUE, once = TRUE, {
-    shinyjs::removeCssClass("card_name", "green")
     shinyjs::addCssClass("card_type", "blue")
-    shinyjs::addCssClass("card_name", "blue")
     shinyjs::showElement("travelled_dist", asis = TRUE)
   })
 

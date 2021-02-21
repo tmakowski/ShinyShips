@@ -60,6 +60,7 @@ ui_ship_selection <- function() {
     ),
     card(
       id = ns("card_name"),
+      class = "blue",
       div(
         class = "content",
         div(class = "header", "Ship name"),
