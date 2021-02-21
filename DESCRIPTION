@@ -1,12 +1,13 @@
 Package: ShinyShips
 Type: Package
-Title: TODO
-Version: 0.2.1
+Title: Shiny Application for Visualization of Ships Data
+Version: 0.2.2
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
            role = c("aut", "cre")))
-Description: TODO
+Description: This package's main purpose is showcasing Shiny application
+    building and design skills of mine.
 Encoding: UTF-8
 License: MIT + file LICENSE
 Depends:
