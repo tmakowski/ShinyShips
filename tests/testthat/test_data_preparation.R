@@ -50,7 +50,7 @@ test_that("test get_ships_distances", {
   )
   expect_equal(get_ships_distances(ships_data1), res1)
 
-  # Ommiting ships with too few observations
+  # Preserving ships with too few observations for calculating distance
   ships_data2 <- data.table::rbindlist(list(
     ships_data1,
     data.table::data.table(
@@ -59,7 +59,18 @@ test_that("test get_ships_distances", {
       LAT = 0,
       LON = 0)
   ))
-  expect_equal(get_ships_distances(ships_data2), res1)
+  res2 <- data.table::rbindlist(list(
+    res1,
+    data.table::data.table(
+      ship_name = "Ship2",
+      dist = NA,
+      lat_start = NA,
+      lon_start = NA,
+      lat_end = 0,
+      lon_end = 0
+    )
+  ))
+  expect_equal(get_ships_distances(ships_data2), res2)
 
   # Ommiting consecutive observations without moving
   ships_data3 <- data.table::rbindlist(list(
@@ -71,7 +82,7 @@ test_that("test get_ships_distances", {
       LON = c(0, 0, 0)
     )
   ))
-  expect_equal(get_ships_distances(ships_data3), res1)
+  expect_equal(get_ships_distances(ships_data3), res2)
 
   # Selecting latest observation
   ships_data4 <- data.table::data.table(
