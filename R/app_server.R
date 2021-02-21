@@ -12,14 +12,31 @@ app_server <- function(input, output, session) {
     dets <- details()
     tiles <- isolate(map_tiles())
 
-    # TODO: handle lack of data
-    leaflet::leaflet() %>>%
-      leaflet::addProviderTiles(tiles) %>>%
+    m <- leaflet::leaflet() %>>% leaflet::addProviderTiles(tiles)
+
+    if (nrow(dets) == 0) {
+      return(m)
+    }
+
+    has_moved <- !is.na(dets$dist)
+    if (has_moved) {
+      labels <- c("Ship's position", "Ships's destination")
+      icon_names <- c("ship", "arrow-down")
+      lng <- c(dets$lon_start, dets$lon_end)
+      lat <- c(dets$lat_start, dets$lat_end)
+    } else {
+      labels <- "Ship's position"
+      icon_names <- "ship"
+      lng <- dets$lon_end
+      lat <- dets$lat_end
+    }
+
+    m %>>%
       leaflet::addAwesomeMarkers(
-        lng = c(dets$lon_start, dets$lon_end),
-        lat = c(dets$lat_start, dets$lat_end),
-        label = c("Start", "End"),
-        icon = leaflet::awesomeIcons(c("ship", "arrow-down"), "fa")
+        lng = lng,
+        lat = lat,
+        label = labels,
+        icon = leaflet::awesomeIcons(icon_names, "fa")
       )
   })
 
