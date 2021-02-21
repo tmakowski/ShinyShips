@@ -80,7 +80,7 @@ app_server <- function(input, output, session) {
 server_ship_selection <- function(input, output, session) {
   observe({
     type <- input$type
-    update_dropdown_input(session, "name", ships$type_names[[type]], value = NA)
+    update_dropdown_input(session, "name", ships$type_names[[type]])
   })
 
   observeEvent(input$type, ignoreInit = TRUE, once = TRUE, {
