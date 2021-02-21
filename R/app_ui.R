@@ -28,7 +28,7 @@ app_ui <- function() {
         split_layout(
           style = "background: none;",
           checkbox_input("show_labels", "Show labels", is_marked = FALSE),
-          checkbox_input("show_line", "Show line")
+          checkbox_input("show_line", "Show line between markers")
         )
       )
     ),
