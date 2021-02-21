@@ -1,7 +1,7 @@
 Package: ShinyShips
 Type: Package
 Title: TODO
-Version: 0.2.0.9035
+Version: 0.2.1.9000
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
