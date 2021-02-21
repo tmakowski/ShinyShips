@@ -62,17 +62,20 @@ get_ships_distances <- function(ships_data) {
     nrow(ships_data) > 0
   )
 
-  ships_coords <- ships_data[order(DATETIME), .(SHIPNAME, LAT, LON)]
+  ships_coords <- ships_data[order(DATETIME), .(ship_type, SHIPNAME, LAT, LON)]
 
   # Removing consecutive rows where the ship has not moved - leaving only the
   # newest (sorted by DATETIME) observation
   ships_coords[,
     has_moved := data.table::shift(LAT, type = "lead") != LAT |
       data.table::shift(LON, type = "lead") != LON,
-    by = .(SHIPNAME)
+    by = .(ship_type, SHIPNAME)
   ]
   unique_coords <- ships_coords[has_moved | is.na(has_moved)]
-  unique_coords_cnt <- unique_coords[, .(LAT, LON, n = .N), by = .(SHIPNAME)]
+  unique_coords_cnt <- unique_coords[,
+    .(LAT, LON, n = .N),
+    by = .(ship_type, SHIPNAME)
+  ]
 
   sailed_dists <- unique_coords_cnt[,
     .(
@@ -82,17 +85,17 @@ get_ships_distances <- function(ships_data) {
       lat_end   = LAT,
       lon_end   = LON
     ),
-    by = .(SHIPNAME)
+    by = .(ship_type, SHIPNAME)
   ]
 
   max_dists <- sailed_dists[,
     .(
       max_dist = ifelse(all(is.na(dist)), NA_real_, max(dist, na.rm = TRUE))
     ),
-    by = .(SHIPNAME)
+    by = .(ship_type, SHIPNAME)
   ]
 
-  max_dists_coords <- max_dists[sailed_dists, on = .(SHIPNAME)]
+  max_dists_coords <- max_dists[sailed_dists, on = .(ship_type, SHIPNAME)]
   max_dists_coords_filt <- max_dists_coords[is.na(max_dist) | max_dist == dist]
 
   # Rows are sorted by DATETIME therefore, tail(..., 1) is latest observation
@@ -104,7 +107,7 @@ get_ships_distances <- function(ships_data) {
       lat_end   = tail(lat_end, 1),
       lon_end   = tail(lon_end, 1)
     ),
-    by = SHIPNAME
+    by = .(ship_type, SHIPNAME)
   ]
 
   data.table::setnames(ships_distances, "SHIPNAME", "ship_name")
