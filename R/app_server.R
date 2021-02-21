@@ -43,7 +43,14 @@ app_server <- function(input, output, session) {
   # Travelled distance ---------------------------------------------------------
   output$dist <- renderText({
     dets <- details()
-    round(dets$dist, 2)
+    dist <- dets$dist
+    req(!is.null(dist))
+
+    if (is.na(dist)) {
+      return("Ship did not move")
+    }
+
+    paste("Travelled distance:", round(dist, 2) , "m")
   })
 
   # Map settings ---------------------------------------------------------------

@@ -17,7 +17,7 @@ app_ui <- function() {
           id = "travelled_dist",
           class = "ui bottom left attached label blue",
           style = "margin-bottom: 14px; margin-left: 14px;",
-          "Travelled distance:", textOutput("dist", inline = TRUE), "m"
+          textOutput("dist", inline = TRUE)
         )
       )
     ),
