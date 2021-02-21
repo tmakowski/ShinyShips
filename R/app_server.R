@@ -14,10 +14,11 @@ app_server <- function(input, output, session) {
     # TODO: handle lack of data
     leaflet::leaflet() %>>%
       leaflet::addProviderTiles(tiles) %>>%
-      leaflet::addMarkers(
+      leaflet::addAwesomeMarkers(
         lng = c(dets$lon_start, dets$lon_end),
         lat = c(dets$lat_start, dets$lat_end),
-        label = c("Start", "End")
+        label = c("Start", "End"),
+        icon = leaflet::awesomeIcons(c("ship", "arrow-down"), "fa")
       )
   })
 
