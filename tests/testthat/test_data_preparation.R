@@ -53,7 +53,11 @@ test_that("test get_ships_distances", {
   # Ommiting ships with too few observations
   ships_data2 <- data.table::rbindlist(list(
     ships_data1,
-    data.table::data.table(ship_name = "Ship2", DATETIME = 1, LAT = 0, LON = 0)
+    data.table::data.table(
+      SHIPNAME = "Ship2",
+      DATETIME = 1,
+      LAT = 0,
+      LON = 0)
   ))
   expect_equal(get_ships_distances(ships_data2), res1)
 
