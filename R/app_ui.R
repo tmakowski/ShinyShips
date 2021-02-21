@@ -34,7 +34,7 @@ app_ui <- function() {
     ),
     button(
       "map_settings_toggle",
-      "Show settings",
+      "Show map settings",
       class = "bottom attached fluid"
     )
   )

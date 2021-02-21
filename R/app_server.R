@@ -34,7 +34,7 @@ app_server <- function(input, output, session) {
     show <- !show_settings()
     show_settings(show)
 
-    btn_label <- paste(if (show) "Hide" else "Show", "settings")
+    btn_label <- paste(if (show) "Hide" else "Show", "map settings")
     update_action_button(session, "map_settings_toggle", label = btn_label)
 
     shinyjs::toggleElement(
