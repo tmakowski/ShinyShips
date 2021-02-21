@@ -1,7 +1,7 @@
 Package: ShinyShips
 Type: Package
 Title: Shiny Application for Visualization of Ships Data
-Version: 0.2.2
+Version: 1.0.0
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",
@@ -16,8 +16,11 @@ Imports:
     assertthat,
     data.table,
     geosphere,
+    leaflet,
+    pipeR,
     shiny,
-    shiny.semantic
+    shiny.semantic,
+    shinyjs
 Suggests:
     usethis,
     testthat
