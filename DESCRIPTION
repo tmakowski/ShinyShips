@@ -1,7 +1,7 @@
 Package: ShinyShips
 Type: Package
 Title: Shiny Application for Visualization of Ships Data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
     person("Tymoteusz", "Makowski",
            email = "makowski.tymoteusz@gmail.com",

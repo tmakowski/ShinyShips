@@ -7,7 +7,7 @@
 run_app(...)
 }
 \arguments{
-\item{...}{Arguments passed on to \code{shiny::runApp}.}
+\item{...}{Arguments passed on to \code{shiny::shinyApp} \code{options} argument.}
 }
 \description{
 Run ShinyShips application
